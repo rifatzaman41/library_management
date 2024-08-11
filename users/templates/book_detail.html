@@ -1,0 +1,30 @@
+ {% extends 'base.html' %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+  
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>{{ book.description }}</p>
+    <img src="{{ book.image.url }}" alt="{{ book.title }}">
+    <p>Price: {{ book.borrowing_price }} Taka</p>
+
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in book.reviews.all %}
+            <li>
+                <strong>{{ review.user.username }}</strong> ({{ review.rating }} stars)
+                <p>{{ review.comment }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'borrow_book' %}">Borrow this Book</a>
+    <a href="{% url 'book_list' %}">Back to Book List</a>
+    <a href="{% url 'profile' %}">My Profile</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

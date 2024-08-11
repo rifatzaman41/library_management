@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+ 
+</head>
+<body>
+    <h1>Book List</h1>
+
+    <div>
+        <h2>Categories</h2>
+        <ul>
+            {% for category in categories %}
+                <li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Books</h2>
+        <ul>
+            {% for book in books %}
+                <li>
+                    <h3><a href="{% url 'book_detail' %}">{{ book.title }}</a></h3>
+                    <p>{{ book.description|truncatewords:30 }}</p>
+                    <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                    <p>Price: {{ book.borrowing_price }} Taka</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'profile' %}">My Profile</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
